@@ -1,0 +1,35 @@
+What is Angular?;A JavaScript library;A TypeScript-based web framework;A CSS framework;A database system;1
+Which command is used to create a new Angular component?;ng create component;ng new component;ng generate component;ng make component;2
+What is the purpose of NgModule?;To organize application into cohesive blocks;To create modules;To import libraries;To export components;0
+Which decorator is used to define a component?;@Component;@Directive;@NgComponent;@View;0
+What is data binding in Angular?;Synchronization between model and view;Database binding;API binding;File binding;0
+Which Angular directive is used for conditional rendering?;*ngIf;*ngShow;*ngDisplay;*ngRender;0
+What is the purpose of Angular CLI?;Command-line interface for Angular development;Cloud integration;Component library;Configuration interface;0
+Which operator is used to transform observable data?;pipe;map;filter;transform;0
+What is dependency injection in Angular?;Design pattern for providing dependencies;Database injection;Code injection;Style injection;0
+Which lifecycle hook is called after component initialization?;ngOnInit;ngAfterInit;ngStart;ngCreate;0
+What is the purpose of Angular Router?;Navigation between views;HTTP routing;API routing;File routing;0
+Which decorator is used to pass data to child component?;@Input;@Output;@Data;@Property;0
+What is an Observable in Angular?;A stream of data over time;A watching function;A component type;A service type;0
+Which module must be imported for HTTP requests?;HttpModule;HttpClientModule;HttpRequestModule;RequestModule;1
+What is the purpose of Angular services?;To share data and logic across components;To serve HTTP requests;To provide styling;To manage routes;0
+Which directive is used for looping in templates?;*ngFor;*ngLoop;*ngRepeat;*ngEach;0
+What is two-way data binding in Angular?;Synchronization in both directions;Binding two components;Dual binding;Double binding;0
+Which decorator marks a class as injectable service?;@Injectable;@Service;@Provider;@Inject;0
+What is the purpose of Angular pipes?;To transform data in templates;To create data pipelines;To handle HTTP;To manage state;0
+Which TypeScript feature allows type checking?;Static typing;Dynamic typing;Weak typing;No typing;0
+What is lazy loading in Angular?;Loading modules on demand;Slow loading;Background loading;Delayed loading;0
+Which lifecycle hook is called before component destruction?;ngOnDestroy;ngBeforeDestroy;ngRemove;ngDelete;0
+What is the purpose of ViewChild decorator?;To access child component or element;To create child views;To display children;To bind child data;0
+Which Angular form type uses explicit model?;Template-driven forms;Reactive forms;Dynamic forms;Model forms;1
+What is RxJS used for in Angular?;Reactive programming with observables;Styling;Routing;Testing;0
+Which operator is used to handle observable errors?;catchError;handleError;errorHandler;catch;0
+What is Angular Material?;UI component library;Material design framework;CSS library;Icon library;0
+Which guard is used to protect routes?;CanActivate;RouteGuard;ProtectRoute;AuthGuard;0
+What is the purpose of ngModel directive?;Two-way data binding for forms;Model creation;Model validation;Model transformation;0
+Which command builds Angular app for production?;ng build --prod;ng build --production;ng build;ng compile;1
+What is AOT compilation in Angular?;Ahead-of-Time compilation;After-of-Time compilation;All-of-Time compilation;Auto-of-Time compilation;0
+Which decorator is used to emit events to parent?;@Output;@Input;@Event;@Emit;0
+What is the purpose of Angular modules?;To organize and configure the application;To create modules;To import packages;To define routes;0
+Which operator is used to subscribe to observables?;subscribe;listen;connect;attach;0
+What is the default change detection strategy?;Default;OnPush;CheckAlways;Auto;0

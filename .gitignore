@@ -1,0 +1,92 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Spring Boot
+spring-boot-*.log
+application-*.properties
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Angular
+angular-src/dist/
+angular-src/.angular/
+angular-src/node_modules/
+src/main/resources/static/
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# IDE - Eclipse
+.project
+.classpath
+.settings/
+.metadata/
+bin/
+tmp/
+
+# IDE - VS Code
+.vscode/
+*.code-workspace
+
+# IDE - NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# OS
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+*.orig
+
+# Logs
+*.log
+logs/
+log/
+
+# Temporary files
+*.tmp
+*.bak
+*.temp
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# Test coverage
+coverage/
+*.coverage
+
+# Environment
+.env
+.env.local
+.env.*.local

@@ -1,0 +1,60 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Angular
+angular-src/dist/
+angular-src/node_modules/
+.angular/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile
+.dockerignore
+docker/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docs
+README.md
+CLAUDE.md
+01_documents/

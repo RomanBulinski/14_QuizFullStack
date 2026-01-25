@@ -1,0 +1,103 @@
+.quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .loading,
+  .error {
+    text-align: center;
+    padding: 3rem;
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+  }
+
+  .error {
+    color: #d32f2f;
+  }
+
+  .quiz-content {
+    .question-card {
+      margin-top: 2rem;
+
+      mat-card-header {
+        margin-bottom: 1.5rem;
+
+        mat-card-title {
+          color: #3f51b5;
+          font-size: 1.1rem;
+        }
+      }
+
+      mat-card-content {
+        .question-text {
+          font-size: 1.3rem;
+          margin-bottom: 2rem;
+          line-height: 1.6;
+          color: #333;
+        }
+
+        .options-group {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+
+          .option {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background-color: #f5f5f5;
+              border-color: #3f51b5;
+            }
+
+            ::ng-deep .mat-radio-label-content {
+              width: 100%;
+              padding-left: 0.5rem;
+            }
+          }
+        }
+      }
+
+      mat-card-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem;
+        gap: 1rem;
+
+        button {
+          min-width: 120px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .quiz-container {
+    padding: 1rem;
+
+    .quiz-content {
+      .question-card {
+        mat-card-content {
+          .question-text {
+            font-size: 1.1rem;
+          }
+        }
+
+        mat-card-actions {
+          flex-direction: column;
+
+          button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

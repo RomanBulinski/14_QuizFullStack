@@ -1,0 +1,35 @@
+What is the primary purpose of Dependency Injection in Spring?;To reduce coupling between components;To improve application performance;To handle HTTP requests;To manage database connections;0
+Which annotation is used to mark a class as a Spring Bean?;@Bean;@Component;@Service;@Autowired;1
+What does IoC stand for in Spring Framework?;Inversion of Control;Input Output Control;Integrated Object Control;Interface Oriented Configuration;0
+Which Spring Boot annotation combines @Configuration, @EnableAutoConfiguration, and @ComponentScan?;@SpringApplication;@SpringBootApplication;@EnableSpringBoot;@SpringConfig;1
+What is the default scope of a Spring Bean?;Prototype;Singleton;Request;Session;1
+Which annotation is used to inject dependencies in Spring?;@Inject;@Autowired;@Resource;All of the above;3
+What is the purpose of @RestController annotation?;To mark a class as a REST API controller;To enable REST template;To configure REST endpoints;To validate REST requests;0
+Which file is used for application configuration in Spring Boot?;config.properties;application.properties;spring.properties;boot.properties;1
+What does @RequestMapping annotation do?;Maps HTTP requests to handler methods;Creates request objects;Validates request parameters;Handles request errors;0
+Which Spring module provides transaction management?;Spring Core;Spring AOP;Spring TX;Spring JDBC;2
+What is the purpose of @Service annotation?;To mark a class as a service layer component;To enable web services;To create REST services;To configure services;0
+Which annotation is used to handle exceptions in Spring MVC?;@ExceptionHandler;@ErrorHandler;@HandleException;@CatchException;0
+What is Spring Boot Auto-configuration?;Manual bean configuration;Automatic configuration based on classpath;Database auto-configuration;XML-based configuration;1
+Which annotation creates a Spring Boot application context?;@SpringBootApplication;@EnableAutoConfiguration;@Configuration;All of the above;3
+What is the purpose of @PathVariable annotation?;To extract values from URI path;To define path mappings;To validate paths;To create path variables;0
+Which Spring project is used for building microservices?;Spring Boot;Spring Cloud;Spring MVC;Spring Data;1
+What is the default port for Spring Boot application?;8080;8000;9090;3000;0
+Which annotation is used to enable Spring Security?;@EnableSecurity;@EnableWebSecurity;@SecurityConfig;@SpringSecurity;1
+What is the purpose of ApplicationContext in Spring?;To manage application state;To provide bean factory functionality;To handle HTTP context;To store application data;1
+Which annotation is used to define a configuration class?;@Config;@Configuration;@ConfigClass;@SpringConfig;1
+What is the purpose of @RequestBody annotation?;To bind HTTP request body to method parameter;To create request body;To validate request body;To log request body;0
+Which Spring Boot starter is used for web applications?;spring-boot-starter-web;spring-boot-starter-webapp;spring-boot-starter-http;spring-boot-starter-rest;0
+What is the purpose of @Transactional annotation?;To mark methods requiring transaction management;To transfer data;To transform objects;To translate messages;0
+Which annotation is used to inject values from properties file?;@Value;@Property;@Config;@PropertyValue;0
+What is Spring Boot Actuator used for?;Monitoring and managing applications;Building web applications;Database access;Security configuration;0
+Which annotation is used to enable JPA repositories?;@EnableJpaRepositories;@EnableRepositories;@JpaConfig;@RepositoryConfig;0
+What is the purpose of @Profile annotation?;To define environment-specific beans;To create user profiles;To profile application performance;To configure profiles;0
+Which HTTP method is used for creating resources in REST?;GET;POST;PUT;DELETE;1
+What is the default embedded server in Spring Boot?;Jetty;Tomcat;Undertow;GlassFish;1
+Which annotation is used to schedule tasks in Spring?;@Scheduled;@Schedule;@Task;@Cron;0
+What is the purpose of @ResponseBody annotation?;To bind method return value to web response body;To create response objects;To validate responses;To log response body;0
+Which Spring Boot property is used to change server port?;server.port;spring.port;http.port;boot.port;0
+What is the bean lifecycle method called after properties are set?;init();afterPropertiesSet();postConstruct();initialize();1
+Which annotation marks a method to run after bean initialization?;@PostConstruct;@Init;@AfterInit;@BeanInit;0
+What is the purpose of @Qualifier annotation?;To specify which bean to inject when multiple candidates exist;To qualify beans for injection;To check bean quality;To name beans;0

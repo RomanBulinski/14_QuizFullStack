@@ -1,0 +1,17 @@
+.progress-container {
+  margin-bottom: 2rem;
+
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  mat-progress-bar {
+    height: 12px;
+    border-radius: 6px;
+  }
+}

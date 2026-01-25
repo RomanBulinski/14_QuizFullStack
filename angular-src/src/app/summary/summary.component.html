@@ -1,0 +1,64 @@
+<div class="summary-container">
+  <mat-card class="summary-card">
+    <mat-card-header>
+      <mat-card-title>Quiz Completed!</mat-card-title>
+      <mat-card-subtitle>{{ technology }} Quiz Results</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="score-section">
+        <div class="score-circle" [ngClass]="scoreClass">
+          <div class="percentage">{{ percentage | number:'1.0-0' }}%</div>
+          <div class="score-text">Score</div>
+        </div>
+
+        <div class="score-details">
+          <h2>{{ correctCount }} / {{ totalQuestions }}</h2>
+          <p>Correct Answers</p>
+        </div>
+      </div>
+
+      <div class="suggestion">
+        <mat-icon>{{ percentage >= 80 ? 'stars' : percentage >= 50 ? 'thumb_up' : 'school' }}</mat-icon>
+        <p>{{ suggestionMessage }}</p>
+      </div>
+
+      <div class="results-detail">
+        <h3>Question Review</h3>
+        <div class="question-list">
+          <div
+            *ngFor="let question of questions; let i = index"
+            class="question-item"
+            [ngClass]="{ 'correct': getQuestionResult(i), 'incorrect': !getQuestionResult(i) }">
+            <div class="question-number">
+              <mat-icon>{{ getQuestionResult(i) ? 'check_circle' : 'cancel' }}</mat-icon>
+              <span>Question {{ i + 1 }}</span>
+            </div>
+            <div class="question-info">
+              <p class="question-text">{{ question.question }}</p>
+              <div class="answer-info">
+                <span class="your-answer">
+                  Your answer: {{ question.options[answers[i]] || 'Not answered' }}
+                </span>
+                <span *ngIf="!getQuestionResult(i)" class="correct-answer">
+                  Correct answer: {{ question.options[question.correctIndex] }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="tryAgain()"
+        class="try-again-button">
+        <mat-icon>refresh</mat-icon>
+        Try Again
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

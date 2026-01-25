@@ -1,0 +1,13 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: fullstack-quiz
+
+logging:
+  level:
+    com.fullstackquiz: INFO
+    org.springframework: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

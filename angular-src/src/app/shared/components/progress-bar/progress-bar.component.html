@@ -1,0 +1,10 @@
+<div class="progress-container">
+  <div class="progress-info">
+    <span>Progress: {{ current }} / {{ total }}</span>
+    <span>{{ percentage | number:'1.0-0' }}%</span>
+  </div>
+  <mat-progress-bar
+    mode="determinate"
+    [value]="percentage">
+  </mat-progress-bar>
+</div>

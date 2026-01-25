@@ -1,0 +1,8 @@
+2. Use Cases (Przypadki Użycia) – Wersja Uproszczona
+W tej wersji występuje tylko jeden aktor: Użytkownik (Gość).
+Przypadek Użycia: Rozwiązanie szybkiego quizu
+• Warunki wstępne: Brak (aplikacja dostępna dla każdego po wejściu na stronę).
+• Krok 1 (Wybór): Użytkownik na stronie głównej wybiera technologię (Spring/Angular) i określa pulę pytań (10/20/30).
+• Krok 2 (Sesja pytań): System losuje odpowiednią liczbę pytań. Użytkownik odpowiada na kolejne pytania, widząc swój postęp na pasku.
+• Krok 3 (Zakończenie): Po ostatnim pytaniu system przelicza wynik.
+• Stan końcowy: Użytkownik widzi ekran podsumowania z wynikiem.

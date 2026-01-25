@@ -1,0 +1,11 @@
+1. Product Requirements Document (PRD) – Simplified Version
+Project Goal: To enable users to instantly test their knowledge of Spring and Angular technologies without the need for registration. The business objective is to provide a lightweight MVP-type educational tool.
+Application Structure (3 pages):
+1. Selection Page: The user selects a quiz topic (Spring or Angular) and the number of questions (10, 20, or 30).
+2. Quiz Page: A mechanism for displaying one question per screen with multiple-choice options, a progress bar, and navigation.
+3. Summary Page: Display of the final result (percentage of correct answers) and suggestions for further learning.
+Technical Requirements:
+• Frontend: Angular (ensuring responsiveness and speed of operation).
+• Backend: Spring Boot (REST API providing the questions).
+• Data: Questions and answers loaded from CSV files.
+• No Authentication: Removal of Spring Security and JWT modules, as well as the User table.

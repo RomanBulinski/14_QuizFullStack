@@ -1,0 +1,54 @@
+<div class="selection-container">
+  <h1>Select Your Quiz</h1>
+
+  <div class="section">
+    <h2>Choose Technology</h2>
+    <div class="technology-tiles">
+      <mat-card
+        class="tech-tile"
+        [class.selected]="selectedTechnology === 'Spring'"
+        (click)="selectTechnology('Spring')">
+        <mat-card-content>
+          <mat-icon>code</mat-icon>
+          <h3>Spring Framework</h3>
+          <p>Test your Spring Boot knowledge</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card
+        class="tech-tile"
+        [class.selected]="selectedTechnology === 'Angular'"
+        (click)="selectTechnology('Angular')">
+        <mat-card-content>
+          <mat-icon>web</mat-icon>
+          <h3>Angular</h3>
+          <p>Test your Angular expertise</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Number of Questions</h2>
+    <div class="count-buttons">
+      <button
+        *ngFor="let count of questionCounts"
+        mat-raised-button
+        [color]="selectedCount === count ? 'primary' : ''"
+        (click)="selectCount(count)">
+        {{ count }} Questions
+      </button>
+    </div>
+  </div>
+
+  <div class="action-section">
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="!selectedTechnology"
+      (click)="startQuiz()"
+      class="start-button">
+      Start Quiz
+    </button>
+  </div>
+</div>

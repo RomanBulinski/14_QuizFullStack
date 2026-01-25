@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.1</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.fullstackquiz</groupId>
+    <artifactId>fullstack-quiz</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>FullStack Quiz Application</name>
+    <description>Spring Boot + Angular Quiz Application</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <frontend.working.directory>${project.basedir}/angular-src</frontend.working.directory>
+        <node.version>v18.19.0</node.version>
+        <npm.version>10.2.3</npm.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Boot Starter Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- OpenCSV for CSV parsing -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.9</version>
+        </dependency>
+
+        <!-- Lombok for reducing boilerplate -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring Boot Starter Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot Maven Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Checkstyle Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <configLocation>google_checks.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>false</failsOnError>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Frontend Maven Plugin -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.15.0</version>
+                <configuration>
+                    <workingDirectory>${frontend.working.directory}</workingDirectory>
+                    <installDirectory>${project.basedir}</installDirectory>
+                </configuration>
+                <executions>
+                    <!-- Install Node and NPM -->
+                    <execution>
+                        <id>install-node-and-npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <nodeVersion>${node.version}</nodeVersion>
+                            <npmVersion>${npm.version}</npmVersion>
+                        </configuration>
+                    </execution>
+
+                    <!-- NPM Install -->
+                    <execution>
+                        <id>npm-install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+
+                    <!-- NPM Build -->
+                    <execution>
+                        <id>npm-build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

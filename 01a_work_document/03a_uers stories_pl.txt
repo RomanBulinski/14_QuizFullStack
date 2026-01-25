@@ -1,0 +1,9 @@
+3. User Stories (Historie Użytkownika)
+Poniższe historie skupiają się na funkcjonalnościach dostarczających wartość bez zbędnej konfiguracji konta.
+1. Wybór parametrów: Jako użytkownik, chcę wybrać temat (Spring lub Angular) i liczbę pytań (10, 20, 30), aby dostosować quiz do mojego czasu i wiedzy.
+    ◦ Kryteria akceptacji (AC): Dostępne dwa kafelki technologii; dropdown lub przyciski z liczbą pytań; brak wymogu logowania.
+2. Interakcja z pytaniem: Jako użytkownik, chcę zaznaczać odpowiedzi w interaktywnym formularzu, aby symulować test wiedzy.
+    ◦ AC: Wyświetlanie jednego pytania na raz; 4 opcje do wyboru; przycisk "Dalej".
+3. Natychmiastowy wynik: Jako użytkownik, chcę po zakończeniu testu zobaczyć swój wynik procentowy, aby ocenić swój poziom zaawansowania.
+    ◦ AC: Wyświetlenie łącznej liczby punktów i procentu poprawnych odpowiedzi natychmiast po ostatnim pytaniu.
+ Dane o quizach (pytania) powinny być teraz ładowane bezpośrednio z bazy danych lub pliku konfiguracyjnego przez backend bez weryfikacji uprawnień.
