@@ -6,6 +6,7 @@ This document provides context for Claude Code when working with the FullStack Q
 
 ### Build Commands
 
+
 ```bash
 # Full build (backend + frontend)
 mvn clean install
@@ -114,6 +115,62 @@ angular-src/src/app/
     └── components/
         └── progress-bar/          # Reusable progress indicator
 ```
+
+## Coding Standards
+
+**IMPORTANT**: When writing or modifying code, always follow software engineering best practices. Detailed coding rules are documented in:
+- **Java/Spring Boot**: `01_documents/claude/java-coding-rules.md`
+- **Angular/TypeScript**: `01_documents/claude/angular-typescript-rules.md`
+
+### Core Principles
+
+Apply these principles to all code:
+
+#### SOLID Principles
+- **S**ingle Responsibility: One class/component, one reason to change
+- **O**pen/Closed: Open for extension, closed for modification
+- **L**iskov Substitution: Subtypes must be substitutable for base types
+- **I**nterface Segregation: Many specific interfaces > one general interface
+- **D**ependency Inversion: Depend on abstractions, not concretions
+
+#### Other Essential Principles
+- **DRY** (Don't Repeat Yourself): Extract common logic, avoid duplication
+- **KISS** (Keep It Simple, Stupid): Simplicity over complexity
+- **YAGNI** (You Aren't Gonna Need It): Only implement what's needed now
+- **Separation of Concerns**: Controllers → Services → Data Access (backend), Components → Services → API (frontend)
+- **Fail Fast**: Validate inputs early, report errors immediately
+- **Composition Over Inheritance**: Prefer object composition for code reuse
+- **Immutability** (TypeScript): Use immutable state updates with spread operator
+
+### Quick Guidelines
+
+#### Java/Spring Boot
+- Use **constructor injection**, not field injection
+- Keep **controllers thin** - delegate to services
+- Use **Lombok** to reduce boilerplate (`@Data`, `@AllArgsConstructor`, etc.)
+- Configure **CSVParser with semicolon delimiter** (`;`) for CSV files
+- **Fail fast** with early validation (`Objects.requireNonNull`, parameter checks)
+- Follow **Google Java Style Guide** (enforced by Checkstyle)
+- Write **Javadoc** on all public methods
+- Use **SLF4J** for logging with appropriate levels
+
+#### Angular/TypeScript
+- **Type everything** - avoid `any`, use explicit types
+- **Unsubscribe** from observables using `takeUntil` pattern or `async` pipe
+- Use **OnPush** change detection when possible
+- **Separate concerns**: Components (presentation) → Services (state/API)
+- Use **immutable state updates** (spread operator, no mutations)
+- Implement **pure functions** without side effects
+- Use **RxJS operators** appropriately (`map`, `filter`, `switchMap`, `catchError`)
+- Follow **Angular Style Guide** naming conventions
+- Use **Angular Material** components consistently
+
+### Before Writing Code
+
+1. **Read existing code** first - understand patterns before modifying
+2. **Check detailed rules** in the coding rules files when uncertain
+3. **Validate against principles** - does this follow SOLID/DRY/KISS?
+4. **Keep it simple** - avoid over-engineering
 
 ## Key Conventions
 
