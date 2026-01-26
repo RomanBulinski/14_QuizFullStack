@@ -3,7 +3,7 @@ version: '3.8'
 services:
   quiz-app:
     build:
-      context: ..
+      context: .
       dockerfile: Dockerfile
     image: fullstack-quiz:latest
     container_name: fullstack-quiz-app
