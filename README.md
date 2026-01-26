@@ -340,3 +340,37 @@ Future enhancements:
 - [ ] Additional technology categories (React, Vue, etc.)
 - [ ] Question submission by users
 - [ ] Multi-language support
+
+## Rosbberry Pai
+
+W katalogu z pom.xml
+
+docker buildx create --use --name pi-builder
+docker buildx inspect --bootstrap
+docker buildx build --platform linux/arm/v7 -f docker/Dockerfile -t fullstack-quiz-armv7:latest --load .
+docker save -o quiz-armv7.tar fullstack-quiz-armv7:latest
+
+Prześlij TAR: scp quiz-armv7.tar pi@IP_Pi:~/ (PuTTY/WinSCP).
+
+Na Pi (tylko TAR + minimalny compose)
+text
+docker load -i ~/quiz-armv7.tar
+Stwórz docker-compose-pi.yml (~5 linii):
+
+text
+version: '3.8'
+services:
+quiz-app:
+image: fullstack-quiz-armv7:latest
+container_name: fullstack-quiz-app
+ports:
+- "8002:8002"
+restart: unless-stopped
+environment:
+- JAVA_OPTS=-Xmx256m -Xms128m  # Mniejszy RAM na Pi
+healthcheck:
+test: ["CMD", "curl", "-f", "http://localhost:8002/api/questions/Spring/10"]
+      interval: 30s
+timeout: 3s
+start_period: 40s
+retries: 3
