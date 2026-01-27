@@ -1,10 +1,12 @@
 package com.fullstackquiz.controller;
 
+import com.fullstackquiz.model.AppInfo;
 import com.fullstackquiz.model.Question;
 import com.fullstackquiz.service.QuizService;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,12 @@ public class QuizController {
   private static final Logger logger = LoggerFactory.getLogger(QuizController.class);
 
   private final QuizService quizService;
+
+  @Value("${app.version}")
+  private String appVersion;
+
+  @Value("${app.name}")
+  private String appName;
 
   public QuizController(QuizService quizService) {
     this.quizService = quizService;
@@ -59,6 +67,18 @@ public class QuizController {
     }
 
     return ResponseEntity.ok(questions);
+  }
+
+  /**
+   * Get application information including version.
+   *
+   * @return application information
+   */
+  @GetMapping("/info")
+  public ResponseEntity<AppInfo> getAppInfo() {
+    logger.debug("Request received for application info");
+    AppInfo appInfo = new AppInfo(appVersion, appName);
+    return ResponseEntity.ok(appInfo);
   }
 
   /**

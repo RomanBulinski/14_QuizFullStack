@@ -17,6 +17,7 @@ import { SelectionComponent } from './selection/selection.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { SummaryComponent } from './summary/summary.component';
 import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProgressBarComponent } from './shared/components/progress-bar/progress-
     SelectionComponent,
     QuizComponent,
     SummaryComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

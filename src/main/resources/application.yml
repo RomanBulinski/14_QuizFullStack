@@ -5,6 +5,10 @@ spring:
   application:
     name: fullstack-quiz
 
+app:
+  version: 0.0.1-SNAPSHOT
+  name: FullStack Quiz Application
+
 logging:
   level:
     com.fullstackquiz: INFO

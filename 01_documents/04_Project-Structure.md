@@ -58,7 +58,7 @@ Project Structure (Single Maven project):
 Build & Run Process:
 1. mvn clean install → frontend-maven-plugin: npm install → ng build → mvn package
 2. java -jar target/fullstack-quiz-0.0.1-SNAPSHOT.jar
-3. App działa: http://localhost:8080 (Angular) + /api/... (backend)
+3. App działa: http://localhost:8001 (Angular) + /api/... (backend)
 
 Technical Requirements:
 • Frontend: Angular 18+ source w angular-src/, build do resources/static/ (Hash routing).

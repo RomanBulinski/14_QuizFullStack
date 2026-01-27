@@ -121,6 +121,7 @@ angular-src/src/app/
 **IMPORTANT**: When writing or modifying code, always follow software engineering best practices. Detailed coding rules are documented in:
 - **Java/Spring Boot**: `01_documents/claude/java-coding-rules.md`
 - **Angular/TypeScript**: `01_documents/claude/angular-typescript-rules.md`
+- **GUI/UX**: `01_documents/claude/gui_rules.md`
 
 ### Core Principles
 
