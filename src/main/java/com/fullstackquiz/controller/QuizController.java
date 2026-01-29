@@ -38,7 +38,7 @@ public class QuizController {
   /**
    * Get random questions for a given technology and count.
    *
-   * @param technology the technology name (Spring or Angular)
+   * @param technology the technology name (Spring, Java, or Angular)
    * @param count the number of questions to return (10, 20, or 30)
    * @return list of random questions
    */
@@ -90,6 +90,7 @@ public class QuizController {
   private boolean isValidTechnology(String technology) {
     return technology != null
         && (technology.equalsIgnoreCase("spring")
+        || technology.equalsIgnoreCase("java")
         || technology.equalsIgnoreCase("angular"));
   }
 

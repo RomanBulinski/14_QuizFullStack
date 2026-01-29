@@ -18,6 +18,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
 /**
@@ -37,8 +40,15 @@ public class QuizService {
   @PostConstruct
   public void init() {
     logger.info("Initializing question cache...");
+
+    // Load from single CSV files (backward compatibility)
     loadQuestionsFromCsv("spring");
     loadQuestionsFromCsv("angular");
+
+    // Load from subdirectories with multiple CSV files
+    loadQuestionsFromDirectory("spring", DATA_PATH + "java/");
+    loadQuestionsFromDirectory("angular", DATA_PATH + "angular/");
+
     logger.info("Question cache initialized successfully");
   }
 
@@ -63,7 +73,7 @@ public class QuizService {
           .build()) {
 
         reader.readAll().forEach(row -> {
-          if (row.length >= 6) {
+          if (row.length >= 6 && !isHeaderRow(row)) {
             String question = row[0];
             String[] options = {row[1], row[2], row[3], row[4]};
             int correctIndex = Integer.parseInt(row[5]);
@@ -78,6 +88,94 @@ public class QuizService {
       logger.error("Error loading questions for {}: {}", technology, e.getMessage());
       questionCache.put(technology.toLowerCase(), new ArrayList<>());
     }
+  }
+
+  /**
+   * Load questions from all CSV files in a directory for a given technology.
+   *
+   * @param technology the technology name (e.g., "java", "angular")
+   * @param directoryPath the directory path containing CSV files
+   */
+  private void loadQuestionsFromDirectory(String technology, String directoryPath) {
+    try {
+      ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+      Resource[] resources = resolver.getResources("classpath:" + directoryPath + "*.csv");
+
+      List<Question> allQuestions = new ArrayList<>(
+          questionCache.getOrDefault(technology.toLowerCase(), new ArrayList<>())
+      );
+
+      for (Resource resource : resources) {
+        List<Question> questions = loadQuestionsFromResource(resource);
+        allQuestions.addAll(questions);
+        logger.info("Loaded {} questions from {}", questions.size(), resource.getFilename());
+      }
+
+      questionCache.put(technology.toLowerCase(), allQuestions);
+      logger.info("Total loaded {} questions for {} from directory",
+          allQuestions.size(), technology);
+    } catch (IOException e) {
+      logger.error("Error loading questions from directory {}: {}",
+          directoryPath, e.getMessage());
+    }
+  }
+
+  /**
+   * Load questions from a single CSV resource.
+   *
+   * @param resource the CSV resource to load
+   * @return list of questions from the resource
+   */
+  private List<Question> loadQuestionsFromResource(Resource resource) {
+    List<Question> questions = new ArrayList<>();
+
+    try {
+      CSVParser parser = new CSVParserBuilder()
+          .withSeparator(';')
+          .build();
+
+      try (CSVReader reader = new CSVReaderBuilder(
+          new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))
+          .withCSVParser(parser)
+          .build()) {
+
+        reader.readAll().forEach(row -> {
+          if (row.length >= 6 && !isHeaderRow(row)) {
+            String question = row[0];
+            String[] options = {row[1], row[2], row[3], row[4]};
+            int correctIndex = Integer.parseInt(row[5]);
+            questions.add(new Question(question, options, correctIndex));
+          }
+        });
+      }
+    } catch (IOException | CsvException | NumberFormatException e) {
+      logger.error("Error loading questions from resource {}: {}",
+          resource.getFilename(), e.getMessage());
+    }
+
+    return questions;
+  }
+
+  /**
+   * Check if a CSV row is a header row.
+   *
+   * @param row the CSV row to check
+   * @return true if the row is a header, false otherwise
+   */
+  private boolean isHeaderRow(String[] row) {
+    if (row.length < 6) {
+      return false;
+    }
+
+    String firstColumn = row[0].toLowerCase();
+    String lastColumn = row[5].toLowerCase();
+
+    // Check for common header patterns
+    return firstColumn.contains("pytanie")
+        || firstColumn.contains("question")
+        || lastColumn.contains("indeks")
+        || lastColumn.contains("correct")
+        || lastColumn.contains("index");
   }
 
   /**
