@@ -1,0 +1,197 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
+
+  test-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Cache Maven dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    - name: Run backend tests
+      run: mvn clean test
+
+  test-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'angular-src/package-lock.json'
+
+    - name: Install frontend dependencies
+      run: |
+        cd angular-src
+        npm ci
+
+    - name: Run frontend tests
+      run: |
+        cd angular-src
+        npm run test -- --watch=false --browsers=ChromeHeadless
+
+    - name: Lint frontend
+      run: |
+        cd angular-src
+        npm run lint || echo "No lint script configured, skipping"
+
+  # Optional: E2E tests with Cypress
+  # Uncomment to enable E2E testing in CI pipeline
+  # e2e-tests:
+  #   runs-on: ubuntu-latest
+  #   needs: [ test-backend ]
+  #
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #
+  #   - name: Set up JDK 17
+  #     uses: actions/setup-java@v4
+  #     with:
+  #       java-version: '17'
+  #       distribution: 'temurin'
+  #
+  #   - name: Cache Maven dependencies
+  #     uses: actions/cache@v4
+  #     with:
+  #       path: ~/.m2/repository
+  #       key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+  #       restore-keys: |
+  #         ${{ runner.os }}-maven-
+  #
+  #   - name: Build and start application
+  #     run: |
+  #       mvn clean install -DskipTests
+  #       java -jar target/fullstack-quiz-*.jar &
+  #       echo $! > app.pid
+  #
+  #   - name: Wait for application to be ready
+  #     run: |
+  #       timeout 60 bash -c 'until curl -f http://localhost:8080/api/questions/Spring/10; do sleep 2; done'
+  #
+  #   - name: Install Cypress dependencies
+  #     run: npm ci
+  #
+  #   - name: Run Cypress E2E tests
+  #     run: npm run cypress:run
+  #
+  #   - name: Stop application
+  #     if: always()
+  #     run: |
+  #       if [ -f app.pid ]; then
+  #         kill $(cat app.pid) || true
+  #       fi
+  #
+  #   - name: Upload Cypress screenshots
+  #     if: failure()
+  #     uses: actions/upload-artifact@v4
+  #     with:
+  #       name: cypress-screenshots
+  #       path: cypress/screenshots
+  #       retention-days: 7
+  #
+  #   - name: Upload Cypress videos
+  #     if: always()
+  #     uses: actions/upload-artifact@v4
+  #     with:
+  #       name: cypress-videos
+  #       path: cypress/videos
+  #       retention-days: 7
+
+  build-and-deploy:
+    needs: [ lint-backend, test-backend, test-frontend ]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build application with Maven
+        run: mvn clean install -DskipTests
+        # This automatically:
+        # 1. Installs Node.js and npm via frontend-maven-plugin
+        # 2. Runs npm install in angular-src/
+        # 3. Builds Angular production bundle
+        # 4. Copies frontend to src/main/resources/static/
+        # 5. Packages everything into single JAR
+
+      - name: Build Docker image
+        run: |
+          docker build -t fullstack-quiz:${{ github.sha }} .
+          docker tag fullstack-quiz:${{ github.sha }} fullstack-quiz:latest
+
+      - name: Save Docker image
+        run: docker save fullstack-quiz:latest | gzip > fullstack-quiz-latest.tar.gz
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: fullstack-quiz-latest.tar.gz
+          retention-days: 7
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: application-jar
+          path: target/fullstack-quiz-*.jar
+          retention-days: 7
